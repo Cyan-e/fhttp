@@ -1,4 +1,4 @@
-module github.com/bogdanfinn/fhttp
+module github.com/Cyan-e/fhttp
 
 go 1.20
 
