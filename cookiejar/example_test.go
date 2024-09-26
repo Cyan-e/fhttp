@@ -9,9 +9,9 @@ import (
 	"log"
 	"net/url"
 
-	http "github.com/bogdanfinn/fhttp"
-	"github.com/bogdanfinn/fhttp/cookiejar"
-	"github.com/bogdanfinn/fhttp/httptest"
+	http "github.com/Cyan-e/fhttp"
+	"github.com/Cyan-e/fhttp/cookiejar"
+	"github.com/Cyan-e/fhttp/httptest"
 )
 
 func ExampleNew() {
