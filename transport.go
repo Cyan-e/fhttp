@@ -1791,7 +1791,6 @@ var _ io.ReaderFrom = (*persistConnWriter)(nil)
 //	socks5://proxy.com|https|foo.com  socks5 to proxy, then https to foo.com
 //	https://proxy.com|https|foo.com   https to proxy, then CONNECT to foo.com
 //	https://proxy.com|http            https to proxy, http to anywhere after that
-//
 type connectMethod struct {
 	_            incomparable
 	proxyURL     *url.URL // nil for no proxy, else full proxy URL
@@ -2572,7 +2571,10 @@ func (pc *persistConn) roundTrip(req *transportRequest) (resp *Response, err err
 		continueCh = make(chan struct{}, 1)
 	}
 
-	if pc.t.DisableKeepAlives &&
+	// TODO Chen Jie: 提高headers的"connection"优先级
+	if req.Header.get("connection") == "" &&
+		req.Header.Get("Connection") == "" &&
+		pc.t.DisableKeepAlives &&
 		!req.wantsClose() &&
 		!isProtocolSwitchHeader(req.Header) {
 		req.extraHeaders().Set("Connection", "close")
